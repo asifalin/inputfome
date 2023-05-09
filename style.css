@@ -2,28 +2,27 @@
     margin: 0;
     padding: 0;
 }
+
 #input-container{
     /* margin: 0 auto; */
-    padding: 5%;
+    padding: 2% 5%;
     line-height: 2rem;
-    font-size: 20px;
+    /* font-size: 20px; */
     color: white;
     border: 2px solid white;
-    width: 20%;
     background-color:gray;
 }
 #input-container input{
-    padding: 5%;
+    padding: 1.5%;
     border-radius: 8px;
-    font-size: 20px;
+    font-size: 17px;
     border: none;
     outline: none;
 }
 #add-btn{
-    font-size: 
-    20px;
-    padding: 3% 7%;
-    margin-top: 5%;
+    /* font-size:20px; */
+    padding: 1.5% 3%;
+    
     background-color: blue;
     color: white;
     border-radius: 8px;
@@ -35,12 +34,75 @@
     background-color: red;
 
 }
-table{
+.table{
     background-color: rgba(128, 128, 128, 0.825);
-    padding: 3%;
-    line-height: 2rem;
-    border: 2px solid white;
-    width: 30%;
+    padding: 2%;
     color: white;
+    /* border: 2px solid black; */
+    /* text-align: center; */
 }
+.table thead tr th{
+    border: 2px solid black;
+    /* text-align: center; */
+    width: 100px;
+}
+tbody{
+    border: 2px solid black;
+}
+#update-name-input{
+    padding: .5rem;
+    border-radius: 10px;
+}
+#update-fname-input{
+    padding: .5rem;
+    border-radius: 10px;
+}
+#update-container button{
+    font-size: 20px;
+    background-color: rgba(255, 0, 0, 0.839);
+    align-items: center;
+    color: white;
+    border-radius: 10px;
+    margin-top: 2%;
+    padding:.5% 2%;
+    cursor: pointer;
+}
+#update-container button:hover{
+    background-color: rgb(64, 64, 249);
+}
+#search-div{
+    background-color:gray;
+    color: white;
+    /* text-align: center; */
+    padding: 2%;
+    font-size: 20px;
+}
+#search-div input{
+    padding: 1%;
+    border-radius: 10px;
+}
+.pop{
+    background-color: gray;
+}
+#popup{
+    
 
+    background-color:greenyellow;
+    width: 20%;
+    text-align: center;
+    margin: 0 auto;
+    padding: 2% 2%;
+    line-height: 2rem;
+    display: none;      
+}
+#popup h1{
+background-color: white;
+color: black;
+}
+#popup button{
+    background-color: blue;
+    color: white;
+    padding: 2% 5%;
+    font-size: 20px;
+    
+}

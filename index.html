@@ -7,41 +7,56 @@
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
-<body>
-  <h1> student data</h1>
-    <div id="container">
-        
+<body>  
         <div id="input-container">
-          <label for="">Name</label><br>
+          <label for="">Name:</label><br>
             <input type="text" id="name-input" placeholder="Enter name"> <br>
-            <label for="">Email</label><br>
-            <input type="text" id="email-input" placeholder="Enter email"> <br>
+            <label for="fname">Father name:</label> <br>
+            <input type="text" id="fname-input" placeholder="Enter your father name">
             <button id="add-btn">Add</button>
 
          </div>
-          <div>
+
+         <div id="search-div">
+          <label for="">Search</label> 
+          <input type="search" id="search"placeholder="searching....." required >
+        </div>
+        <div class="pop">
+        <div id="popup">
+          <h1>Deleted Row</h1>
+            <p>Are u shure to deleted in this row</p>
+            <button id="popup-yasbtn"> Yas</button>
+            <button id="popup-nobtn"> No</button>
+          </div>
+        </div>
+        
+          <div class="table">
          <table>
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Email</th>
+                    <th>Father Name</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody id="table-body"></tbody>
         </table>
+         
+       
 
             <div id="update-container">
 
-            <input type="text" id="update-name-input">
-            <input type="text" id="update-email-input">
+            <input type="text" id="update-name-input" placeholder="update name">
+            <input type="text" id="update-fname-input" placeholder="update email"> <br>
             <button id="update-btn">Update</button>
             <button id="cancel-btn">Cancel</button>
         </div>
     </div>
-  </div>
-    </form>
+
+
+
+
   </body>
 </html>
 

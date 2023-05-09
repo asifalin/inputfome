@@ -1,44 +1,64 @@
-const nameInput = document.getElementById('name-input');
-const emailInput = document.getElementById('email-input');
-const addBtn = document.getElementById('add-btn');
-const tableBody = document.getElementById('table-body');
-const updateNameInput = document.getElementById('update-name-input');
-const updateEmailInput = document.getElementById('update-email-input');
-const updateBtn = document.getElementById('update-btn');
-const cancelBtn = document.getElementById('cancel-btn');
+
+let nameInput = document.getElementById('name-input');
+let fnameInput = document.getElementById('fname-input');
+let addBtn = document.getElementById('add-btn');
+let tableBody = document.getElementById('table-body');
+let updateNameInput = document.getElementById('update-name-input');
+let updateFnameInput = document.getElementById('update-fname-input');
+
+let updateBtn = document.getElementById('update-btn');
+let cancelBtn = document.getElementById('cancel-btn');
 let users = JSON.parse(localStorage.getItem('users')) || [];
 let currentUserId = null;
-const validRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+const valid = '';
 
 function renderTable() {
   tableBody.innerHTML = "";
   for (let i = 0; i < users.length; i++) {
-    const user = users[i];
-    const tr = document.createElement("tr");
-    const idTd = document.createElement("td");
-    const nameTd = document.createElement("td");
-    const emailTd = document.createElement("td");
-    const actionTd = document.createElement("td");
-    const editBtn = document.createElement("button");
+    let user = users[i];
+    let tr = document.createElement("tr");
+    let idTd = document.createElement("td");
+    let nameTd = document.createElement("td");
+    let fnameTd = document.createElement("td");
+    let actionTd = document.createElement("td");
+    let editBtn = document.createElement("button");
     editBtn.className = "edit-btn";
-    const deleteBtn = document.createElement("button");
+    let deleteBtn = document.createElement("button");
     deleteBtn.className = "delete-btn";
     idTd.innerText = user.id;
     nameTd.innerText = user.name;
-    emailTd.innerText = user.email;
+    fnameTd.innerText = user.fname;
     editBtn.innerText = "Edit";
     deleteBtn.innerText = "Delete";
     editBtn.addEventListener("click", () => {
       showUpdateForm(user.id);
-    });
+    })
+addBtn.addEventListener("click", addUser);
+
+ 
+let btn12 = document.getElementById("popup")
     deleteBtn.addEventListener("click", () => {
-      deleteUser(user.id);
+      if(btn12.style.display = "none"){
+        btn12.style.display = "block"
+      }
+      let yesss = document.getElementById("popup-yasbtn")
+      yesss.addEventListener('click' , ()=>{
+        deleteUser(user.id);
+        btn12.style.display = "none"
+      })
+      let nono = document.getElementById("popup-nobtn")
+      nono.addEventListener('click' ,()=>{
+        console.log("this is also working ")
+        btn12.style.display = "none"
+
+        
+      })
     });
     actionTd.appendChild(editBtn);
     actionTd.appendChild(deleteBtn);
     tr.appendChild(idTd);
     tr.appendChild(nameTd);
-    tr.appendChild(emailTd);
+    tr.appendChild(fnameTd);
     tr.appendChild(actionTd);
     tableBody.appendChild(tr);
   }
@@ -47,9 +67,9 @@ function renderTable() {
 
 function addUser() {
   const name = nameInput.value.trim();
-  const email = emailInput.value.trim();
-  if (email.match(validRegex)) {
-    if (name !== "" && email !== "") {
+  const fname = fnameInput.value.trim();
+  if (fname.match(valid)) {
+    if (name !== "" && fname !== "") {
       let id = 1;
       let val = users.map(function(x) {return x.id; }).indexOf(id);
       while(val !== -1) {
@@ -59,64 +79,62 @@ function addUser() {
       const user = {
         id: id,
         name: name,
-        email: email
+        fname: fname
       };
       users.push(user);
       localStorage.setItem("users", JSON.stringify(users));
-      emailInput.value = "";
+      fnameInput.value = "";
       nameInput.value = "";
       renderTable();
     } else {
-      alert("Name and email are required.");
+      alert("Name and fname are required.");
     }
-  } else {
-    alert("Invalid email address!");
   }
 }
 
 function updateUser() {
-  const name = updateNameInput.value;
-  const email = updateEmailInput.value;
-  if (email.match(validRegex)) {
+  let name = updateNameInput.value;
+  let fname = updateFnameInput.value;
+  if (fname.match(valid)) {
     const index = users.findIndex((user) => user.id === currentUserId);
     if (index !== -1) {
       users[index].name = name;
-      users[index].email = email;
+      users[index].fname = fname;
       localStorage.setItem("users", JSON.stringify(users));
       hideUpdateForm();
       renderTable();
     }
-  } else {
-    alert("Invalid email address!");
-  }
+  } 
 }
+// showUpdateForm
 
 function showUpdateForm(userId) {
   const user = users.find((user) => user.id === userId);
   if (user) {
     updateNameInput.value = user.name;
-    updateEmailInput.value = user.email;
+    updateFnameInput.value = user.fname;
     currentUserId = user.id;
     updateBtn.addEventListener("click", updateUser);
     cancelBtn.addEventListener("click", hideUpdateForm);
     updateBtn.style.display = "inline-block";
     cancelBtn.style.display = "inline-block";
     updateNameInput.style.display = "inline-block";
-    updateEmailInput.style.display = "inline-block";
+    updateFnameInput.style.display = "inline-block";
+    
     document.getElementById("update-container").style.display = "block";
   }
 }
 
 function hideUpdateForm() {
   updateNameInput.value = "";
-  updateEmailInput.value = "";
+  updateFnameInput.value = "";
   currentUserId = null;
   updateBtn.removeEventListener("click", updateUser);
   cancelBtn.removeEventListener("click", hideUpdateForm);
   updateBtn.style.display = "none";
   cancelBtn.style.display = "none";
   updateNameInput.style.display = "none";
-  updateEmailInput.style.display = "none";
+  updateFnameInput.style.display = "none";
   document.getElementById("update-container").style.display = "none";
 }
 
@@ -129,8 +147,34 @@ function deleteUser(userId) {
   renderTable();
 }
 
-// Event Listeners
-addBtn.addEventListener("click", addUser);
+// =========search=========
+
+const searchInput = document.getElementById("search");
+const table = document.querySelector("table");
+searchInput.addEventListener("input", function () {
+  searchRows(searchInput.value);
+});
+function searchRows(query) {
+  
+  const tbody = table.querySelector("tbody");
+  const rows = Array.from(tbody.querySelectorAll("tr"));
+  rows.forEach((row) => {
+    const cells = row.querySelectorAll("td");
+    let rowMatches = false;
+    cells.forEach((cell) => {
+      if (cell.textContent.toLowerCase().includes(query.toLowerCase())) {
+        rowMatches = true;
+      }
+    });
+    if (rowMatches) {
+      row.style.display = "";
+    } else {
+      row.style.display = "none";
+    }
+  });
+}
 
 // Initialize table
 renderTable();
+
+
